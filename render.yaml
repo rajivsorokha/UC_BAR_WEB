@@ -1,0 +1,39 @@
+# Render Blueprint: Render → New → Blueprint → select this repo.
+# One web service (React site + API + admin) and one Postgres database.
+services:
+  - type: web
+    name: ucbar-site
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/public/site
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ucbar-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_USER
+        value: admin
+      - key: ADMIN_PASS        # you'll be asked for this when the blueprint is created
+        sync: false
+      # Optional – set any one (or several) to enable the AI chat assistant; leave the rest empty.
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: SITE_URL          # optional, e.g. https://www.ucbarinfotech.com
+        sync: false
+
+databases:
+  - name: ucbar-db
+    databaseName: ucbar
+    plan: free

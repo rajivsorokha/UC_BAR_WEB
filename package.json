@@ -1,0 +1,28 @@
+{
+  "name": "ucbar-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "UC Bar Infotech website + admin panel + AI chat assistant (React, Node/Express, Postgres)",
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"node --watch server/index.js\" \"vite --config vite.config.mjs\"",
+    "build": "vite build --config vite.config.mjs && node scripts/postbuild.cjs",
+    "start": "node server/index.js",
+    "reset-admin": "node scripts/reset-admin.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "bcryptjs": "^3.0.3",
+    "concurrently": "^10.0.5",
+    "cookie-session": "^2.1.1",
+    "express": "^4.22.3",
+    "multer": "^2.4.0",
+    "pg": "^8.23.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^7.18.4",
+    "vite": "^8.3.3"
+  }
+}
